@@ -21,22 +21,22 @@ class blackfire::agent inherits blackfire {
 
   $log_level = 0 + $params['log_level']
 
-  validate_bool($params['manage'])
-  validate_string($params['version'])
-  validate_bool($params['manage_service'])
-  validate_string($params['running'])
-  validate_string($params['server_id'])
-  validate_string($params['server_token'])
-  validate_string($params['socket'])
-  validate_string($params['log_file'])
+  validate_legacy(Boolean, 'validate_bool', $params['manage'])
+  validate_legacy(String, 'validate_string', $params['version'])
+  validate_legacy(Boolean, 'validate_bool', $params['manage_service'])
+  validate_legacy(String, 'validate_string', $params['service_ensure'])
+  validate_legacy(String, 'validate_string', $params['server_id'])
+  validate_legacy(String, 'validate_string', $params['server_token'])
+  validate_legacy(String, 'validate_string', $params['socket'])
+  validate_legacy(String, 'validate_string', $params['log_file'])
   if $log_level < 1 or $log_level > 4 {
     fail 'Invalid log_level. Valid levels are: 4 - debug, 3 - info, 2 - warning, 1 - error'
   }
-  validate_string($params['collector'])
-  validate_string($params['http_proxy'])
-  validate_string($params['https_proxy'])
-  validate_string($params['ca_cert'])
-  validate_string($params['spec'])
+  validate_legacy(String, 'validate_string', $params['collector'])
+  validate_legacy(String, 'validate_string', $params['http_proxy'])
+  validate_legacy(String, 'validate_string', $params['https_proxy'])
+  validate_legacy(String, 'validate_string', $params['ca_cert'])
+  validate_legacy(String, 'validate_string', $params['spec'])
 
   if $params['manage'] == true {
     anchor { '::blackfire::agent::begin': }

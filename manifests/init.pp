@@ -7,14 +7,14 @@ class blackfire (
   $manage_repo = $blackfire::params::manage_repo
 ) inherits blackfire::params {
 
-  validate_string($server_id)
-  validate_string($server_token)
+  validate_legacy(String, 'validate_string', $server_id)
+  validate_legacy(String, 'validate_string', $server_token)
   if empty($server_id) or empty($server_token) {
     fail 'server_id and server_token are required. Get them on https://blackfire.io/account/agents'
   }
-  validate_hash($agent)
-  validate_hash($php)
-  validate_bool($manage_repo)
+  validate_legacy(Hash, 'validate_hash', $agent)
+  validate_legacy(Hash, 'validate_hash', $php)
+  validate_legacy(Boolean, 'validate_bool', $manage_repo)
 
   anchor { '::blackfire::begin': }
   -> class { '::blackfire::repo': }
